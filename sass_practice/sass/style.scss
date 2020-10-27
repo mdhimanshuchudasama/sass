@@ -1,0 +1,113 @@
+    @import "partials/button-style";
+    @import "partials/variables";
+    @import "partials/mixins";
+    @import "partials/typography";
+    // sass function
+    @function sum($val1, $val2) {
+        @return $val1+$val2;
+    }
+    
+    // interpolation with mixin
+    @mixin gap($property, $side, $value) {
+        #{$property}-#{$side}: $value + px;
+    }
+    
+    // Use of For Loop
+    @for $i from 1 through 4 {
+        .box-#{$i} h2 {
+            width: #{$i*150}px;
+            background: darken(blue, $i*10%);
+            font-size: 20px;
+        }
+    }
+    
+    body {
+        @include gap(margin, left, 50);
+        @include gap(margin, right, 50);
+    }
+    
+    .boxes {
+        display: flex;
+    }
+    
+    .box1 {
+        @include boxes($color-primary, $color-primary);
+        background: map-get($colors, yellow-color);
+    }
+    
+    .box1 a:hover {
+        background: darken($color-primary, 15%);
+    }
+    
+    // Use of Mixin and Include
+    .box2 {
+        @include boxes($color-secondary, $color-secondary);
+        background: map-get($colors, green-color);
+    }
+    
+    // Use of  Extend in Sass
+    .box3 {
+        @extend .box1;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    // Nesting In SASS
+    ul {
+        list-style-type: circle;
+        li {
+            padding: 15px;
+            a {
+                background: red;
+                display: inline-block;
+                padding: 10px;
+                color: #fff;
+                &:hover {
+                    background: green;
+                }
+            }
+            &:first-child {
+                border: 5px solid red;
+            }
+        }
+    }
+    
+    h1 {
+        color: #000000;
+    }
+    
+    .form-data {
+        table {
+            display: block;
+            width: 100%;
+        }
+        .form-field {
+            input[type="text"] {
+                @extend .input-basic;
+                background: #ffffff;
+                color: #000000;
+            }
+            input[type="password"] {
+                @extend .input-basic;
+                background: #ffffff;
+                color: #000000;
+            }
+        }
+    }
+    
+    input[type="email"] {
+        @include input-type;
+    }
+    
+    input[type="tel"] {
+        @include input-type;
+    }
+    
+    label {
+        font-size: 20px;
+    }
+    
+    input[type="submit"] {
+        @extend .input-basic;
+        color: $input-font-color;
+        background: #d8fc21;
+    }
